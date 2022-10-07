@@ -2,10 +2,13 @@ const express = require("express");
 const Product = require("./models/product");
 const mongoose = require("mongoose");
 const Cart = require("./models/cart");
+const dotenv = require("dotenv");
 
+dotenv.config();
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-mongoose.connect("mongodb://localhost:27017/shopping", {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
 });
 
@@ -90,6 +93,6 @@ app.post("/cartitems", async (req, res) => {
   });
 });
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log("Server is running on port 3000");
 });
